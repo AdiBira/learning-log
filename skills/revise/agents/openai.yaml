@@ -1,4 +1,0 @@
-interface:
-  display_name: "Revise"
-  short_description: "Re-teach and test concepts from your learning log"
-  default_prompt: "Use $revise to review the concepts I learned recently."

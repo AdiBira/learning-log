@@ -56,10 +56,12 @@ add a `Stop` hook in your harness that re-runs the sweep at the end of every ses
 opt-in and not bundled, because an always-on hook is invasive for a shared skill; add it only
 if you want zero-effort passive capture.
 
-## Pairs with
+## Pairs with revise
 
-A review skill (spaced repetition) can read recent entries and **re-teach** each concept at
-its original depth, then optionally quiz you. Kept separate so capture stays lightweight.
+[revise](https://github.com/AdiBira/revise) turns the learning log into an interactive review.
+It lets you choose a concept, re-teaches it at the depth you reached, asks a thoughtful
+application question, then lets you go deeper or continue. Capture stays lightweight while
+revision remains something you can invoke whenever you want it.
 
 ## License
 

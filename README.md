@@ -1,7 +1,9 @@
-# learning-log
+# learning-log + revise
 
-A skill that quietly keeps a running log of the technical concepts you **genuinely learn** —
-captured the moment they click, not when you remember to write them down.
+Two model-agnostic skills that form a lightweight learning loop:
+
+- **`learning-log`** quietly captures concepts you genuinely learn as they click.
+- **`revise`** re-teaches those concepts at the captured depth and optionally tests recall.
 
 Most learning trackers only catch what you explicitly ask ("what is X?"). This one also
 catches **learning-by-doing** — the concept you finally understood by debugging it, tuning
@@ -35,18 +37,25 @@ user files (default `~/learned-log.md`; Claude users may prefer `~/.claude/learn
 
     npx skills add AdiBira/learning-log
 
-**Manual:** copy `SKILL.md` into your skills directory, e.g.
+The installer discovers both skills and lets you choose either or both. To request both
+explicitly:
+
+    npx skills add AdiBira/learning-log --skill learning-log --skill revise
+
+**Manual:** copy both directories from `skills/` into your skills directory, e.g.
 
     ~/.claude/skills/learning-log/SKILL.md
+    ~/.claude/skills/revise/SKILL.md
 
-That's it. The skill self-triggers whenever you're learning; nothing else to configure.
+`learning-log` self-triggers while you build understanding. Invoke `revise` whenever you want
+to review; neither skill needs a hook.
 
 ## Log format
 
     - [x] **{concept}** | {project} | {date} | {one-line explanation}
 
-The explanation is pitched at the depth you engaged at, so a companion review skill can
-re-teach each concept at the same level later.
+The explanation is pitched at the depth you engaged at, so `revise` can restore that level
+later.
 
 ## Optional: always-on capture via a hook
 
@@ -56,10 +65,19 @@ add a `Stop` hook in your harness that re-runs the sweep at the end of every ses
 opt-in and not bundled, because an always-on hook is invasive for a shared skill; add it only
 if you want zero-effort passive capture.
 
-## Pairs with
+## Revise modes
 
-A review skill (spaced repetition) can read recent entries and **re-teach** each concept at
-its original depth, then optionally quiz you. Kept separate so capture stays lightweight.
+- **Re-teach (default):** restore the mental model at the granularity saved in the log.
+- **Active recall:** ask first, grade honestly, re-teach gaps, and retry.
+- **Re-teach + recall:** explain first, then check immediate comprehension.
+
+Quiz is a mode inside `revise`, not a third skill, because both actions select the same log
+entries and share the same teaching depth and review history. A pre-merge quiz about a code
+change is a separate use case and is intentionally out of scope.
+
+The log's one-line explanation preserves conceptual depth, not a verbatim lesson. When the
+original conversation is unavailable, `revise` reconstructs the smallest useful explanation
+at that granularity instead of pretending it can reproduce the exact earlier wording.
 
 ## License
 
